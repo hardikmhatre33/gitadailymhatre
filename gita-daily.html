@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Gita Daily — Mhatre's Path</title>
+<style>
+  :root{
+    --bg:#fdf6ec;
+    --bg2:#f7ead1;
+    --ink:#3b2a14;
+    --accent:#b8410a;
+    --accent2:#d98324;
+    --gold:#a97a22;
+    --soft:#8a6f46;
+    --card:#fffaf0;
+    --shadow:0 12px 40px rgba(90,50,10,.12);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;font-family:'Georgia','Iowan Old Style',serif;color:var(--ink);background:linear-gradient(160deg,var(--bg),var(--bg2));min-height:100vh}
+  body{display:flex;flex-direction:column;align-items:center;padding:24px 16px 80px}
+
+  header.top{
+    width:100%;max-width:860px;display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;
+  }
+  .brand{display:flex;gap:12px;align-items:center}
+  .om{
+    width:46px;height:46px;display:flex;align-items:center;justify-content:center;
+    background:radial-gradient(circle at 30% 30%,#ffd98a,var(--accent2));
+    border-radius:50%;color:#fff;font-size:26px;font-weight:bold;
+    box-shadow:0 4px 12px rgba(180,80,0,.3);
+  }
+  .brand h1{font-size:1.25rem;margin:0;letter-spacing:.5px;color:var(--accent)}
+  .brand small{color:var(--soft);font-style:italic}
+
+  .streak{
+    background:#fff;border:1px solid #eadfc4;padding:8px 14px;border-radius:999px;
+    font-size:.85rem;color:var(--soft);display:flex;gap:8px;align-items:center;
+  }
+  .streak b{color:var(--accent)}
+
+  .greeting{
+    width:100%;max-width:860px;text-align:center;padding:22px 28px;margin-bottom:18px;
+    background:linear-gradient(135deg,#fff7e4,#fde3b6);border-radius:16px;border:1px solid #eecd8a;
+    position:relative;overflow:hidden;
+  }
+  .greeting::before{
+    content:"❋";position:absolute;top:10px;left:18px;color:#e3b575;font-size:1.2rem;opacity:.6;
+  }
+  .greeting::after{
+    content:"❋";position:absolute;bottom:10px;right:18px;color:#e3b575;font-size:1.2rem;opacity:.6;
+  }
+  .greet-heading{font-size:1.5rem;color:var(--accent);letter-spacing:.5px;margin-bottom:10px;font-family:'Georgia',serif}
+  .greet-heading .name{color:var(--gold);font-weight:bold;font-style:italic}
+  .greet-body{color:var(--soft);font-style:italic;font-size:1rem;line-height:1.75;max-width:620px;margin:0 auto}
+  .greet-date{margin-top:12px;font-size:.8rem;color:var(--accent);letter-spacing:2px;text-transform:uppercase;font-style:normal;opacity:.8}
+
+  .paws{
+    width:100%;max-width:860px;background:linear-gradient(135deg,#f3f7e8,#e8f0d3);
+    border-radius:14px;padding:16px 24px;margin-bottom:18px;border:1px solid #cfdca8;text-align:center;
+    box-shadow:0 6px 18px rgba(80,90,30,.07);
+  }
+  .paws-heading{
+    font-size:.78rem;color:#5a6b2c;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;font-weight:bold;
+  }
+  .paws-heading .pups{color:#7a8a3f;font-style:italic;letter-spacing:0;text-transform:none;font-weight:normal;font-family:'Georgia',serif;font-size:.95rem}
+  .paws-body{font-size:.95rem;color:#4d5a30;line-height:1.65;font-style:italic;max-width:620px;margin:0 auto}
+
+  .card{
+    width:100%;max-width:860px;background:var(--card);border-radius:18px;padding:32px 32px 28px;
+    box-shadow:var(--shadow);border:1px solid #efdeb9;position:relative;overflow:hidden;
+  }
+  .card::before{
+    content:"";position:absolute;top:0;left:0;right:0;height:6px;
+    background:linear-gradient(90deg,var(--accent),var(--accent2),var(--gold));
+  }
+
+  .daybar{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;flex-wrap:wrap;gap:10px}
+  .daytag{
+    display:inline-block;padding:4px 14px;border-radius:999px;background:#fcebd0;color:var(--accent);
+    font-size:.8rem;letter-spacing:1px;text-transform:uppercase;font-weight:bold;
+  }
+  .chapter{font-size:.85rem;color:var(--soft);font-style:italic}
+  .cardDate{font-size:.8rem;color:var(--gold);letter-spacing:1px}
+
+  h2.title{font-size:1.5rem;margin:4px 0 20px;color:var(--accent);font-weight:normal;border-bottom:1px dashed #e2c98f;padding-bottom:10px}
+
+  .section{margin:22px 0}
+  .section h3{
+    font-size:.75rem;text-transform:uppercase;letter-spacing:2px;color:var(--gold);margin:0 0 8px;font-weight:bold;
+  }
+  .sanskrit{
+    font-family:'Noto Serif Devanagari','Sanskrit Text',serif;
+    font-size:1.35rem;line-height:1.9;color:#5a2b0c;white-space:pre-line;
+    background:#fff7e4;padding:18px 20px;border-left:4px solid var(--accent2);border-radius:6px;
+  }
+  .translit{
+    font-style:italic;color:var(--soft);margin-top:8px;font-size:1rem;line-height:1.7;white-space:pre-line;
+  }
+  .meaning{font-size:1.05rem;line-height:1.8}
+  .meaning p{margin:0 0 12px}
+  .meaning p:last-child{margin-bottom:0}
+  .reflect{
+    background:linear-gradient(135deg,#fff3de,#fde9c8);padding:18px 20px;border-radius:10px;
+    line-height:1.75;border:1px dashed #e0b775;
+  }
+  .reflect em{color:var(--accent);font-style:normal;font-weight:bold}
+
+  .prompt{margin-top:14px;font-size:.95rem;color:var(--soft);font-style:italic}
+  textarea{
+    width:100%;min-height:70px;margin-top:8px;padding:12px;border-radius:8px;border:1px solid #e5d2a3;
+    background:#fffdf6;font-family:inherit;font-size:.95rem;resize:vertical;color:var(--ink);
+  }
+
+  .controls{
+    display:flex;justify-content:space-between;gap:10px;margin-top:26px;
+  }
+  button{
+    background:var(--accent);color:#fff;border:0;padding:10px 22px;border-radius:999px;font-size:.95rem;
+    cursor:pointer;font-family:inherit;letter-spacing:.5px;transition:.2s;
+    box-shadow:0 4px 10px rgba(180,65,10,.25);
+  }
+  button:hover{background:var(--accent2);transform:translateY(-1px)}
+  button.ghost{background:transparent;color:var(--accent);box-shadow:none;border:1px solid #e3c8a0}
+  button.ghost:hover{background:#fff3e0;color:var(--accent)}
+  button:disabled{opacity:.4;cursor:not-allowed;transform:none}
+
+  .dots{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-top:24px;max-width:860px}
+  .dot{
+    width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+    background:#fff;border:1px solid #e8d3a3;color:var(--soft);font-size:.7rem;cursor:pointer;transition:.2s;
+  }
+  .dot.done{background:var(--accent2);color:#fff;border-color:var(--accent2)}
+  .dot.active{outline:3px solid #f8c97f;transform:scale(1.15)}
+  .dot:hover{transform:scale(1.1)}
+
+  footer{margin-top:30px;font-size:.8rem;color:var(--soft);text-align:center;max-width:700px;line-height:1.6}
+
+  .tab-row{display:flex;gap:6px;margin:18px 0 0;border-bottom:1px solid #ecd7a9}
+  .tab{
+    padding:8px 16px;font-size:.85rem;cursor:pointer;border:0;background:transparent;color:var(--soft);
+    border-bottom:3px solid transparent;font-family:inherit;letter-spacing:.5px;
+  }
+  .tab.active{color:var(--accent);border-color:var(--accent);font-weight:bold}
+  .tab-content{display:none;padding-top:18px}
+  .tab-content.active{display:block}
+
+  .timer{
+    position:fixed;bottom:20px;right:20px;background:var(--card);border:1px solid #e8d3a3;
+    padding:10px 16px;border-radius:999px;box-shadow:var(--shadow);font-size:.85rem;color:var(--soft);
+    display:flex;gap:8px;align-items:center;
+  }
+  .timer b{color:var(--accent);font-variant-numeric:tabular-nums}
+
+  @media (max-width:600px){
+    .card,.greeting{padding:22px 20px}
+    h2.title{font-size:1.25rem}
+    .sanskrit{font-size:1.15rem;padding:14px}
+    .timer{bottom:10px;right:10px;font-size:.75rem}
+    .greet-heading{font-size:1.25rem}
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="brand">
+    <div class="om">ॐ</div>
+    <div>
+      <h1>Gita Daily</h1>
+      <small>Mhatre's 30-day path through the Bhagavad Gita</small>
+    </div>
+  </div>
+  <div class="streak" id="streakBadge">Day <b id="streakNum">1</b> of 30</div>
+</header>
+
+<div class="greeting">
+  <div class="greet-heading">Namaste, <span class="name">Mhatres</span> 🙏</div>
+  <div class="greet-body" id="greetBody"></div>
+  <div class="greet-date" id="greetDate"></div>
+</div>
+
+<div class="paws">
+  <div class="paws-heading">🐾 A note for <span class="pups">Bailey &amp; Lily</span></div>
+  <div class="paws-body" id="pawsBody"></div>
+</div>
+
+<div class="card">
+  <div class="daybar">
+    <span class="daytag" id="dayTag">Day 1</span>
+    <span class="chapter" id="chapterRef">Chapter 2 · Verse 47</span>
+    <span class="cardDate" id="cardDate"></span>
+  </div>
+
+  <h2 class="title" id="theme">The Right to Action</h2>
+
+  <div class="tab-row">
+    <button class="tab active" data-tab="read">Read</button>
+    <button class="tab" data-tab="reflect">Reflect</button>
+    <button class="tab" data-tab="journal">Journal</button>
+  </div>
+
+  <div class="tab-content active" id="tab-read">
+    <div class="section">
+      <h3>Shloka · श्लोक</h3>
+      <div class="sanskrit" id="sanskrit"></div>
+      <div class="translit" id="translit"></div>
+    </div>
+
+    <div class="section">
+      <h3>Meaning</h3>
+      <div class="meaning" id="meaning"></div>
+    </div>
+  </div>
+
+  <div class="tab-content" id="tab-reflect">
+    <div class="section">
+      <h3>Connection to Life</h3>
+      <div class="reflect" id="reflect"></div>
+    </div>
+  </div>
+
+  <div class="tab-content" id="tab-journal">
+    <div class="section">
+      <h3>A Question to Sit With</h3>
+      <div class="prompt" id="prompt"></div>
+      <textarea id="journal" placeholder="Write your reflection here... (auto-saved to this device)"></textarea>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button class="ghost" id="prevBtn">← Previous Day</button>
+    <button id="completeBtn">Mark Complete ✓</button>
+    <button class="ghost" id="nextBtn">Next Day →</button>
+  </div>
+</div>
+
+<div class="dots" id="dots"></div>
+
+<footer>
+  A quiet daily practice with the Bhagavad Gita, built for the Mhatres — and for Bailey and Lily. Sanskrit shlokas come from the classical text. Meanings and reflections are written as plain-language companions for contemplation — not a substitute for studying the Gita in full with a trusted teacher. 🙏
+</footer>
+
+<div class="timer"><span>Session</span><b id="timer">00:00</b></div>
+
+<script>
+// ---------------- Greetings that rotate each day ----------------
+const greetings = [
+  "May this page find you well, dear ones, and may the next few minutes belong only to you. Set down what you are carrying. Take one unhurried breath. Let the Gita meet your heart exactly where it is today.",
+  "Welcome back, dear one. The same sun rises again, a little differently. Soften your shoulders, unclench your jaw, and let the words of Krishna find you in the quiet.",
+  "A fresh page, a fresh breath. Whatever yesterday held, it has already passed. Sit a moment with nothing to prove — the Gita asks only that you be here.",
+  "The ancient voice of the Gita is patient; it has waited for you. Come as you are — tired, scattered, hopeful, uncertain. Every mood is welcome at this door.",
+  "May your hearts be easy this morning, Mhatres. Before the day reaches for you, let this moment reach back — slow, warm, and your own.",
+  "A little light is enough. Do not ask this practice to fix everything; ask it only to keep you company. That is already a great deal.",
+  "Return, return, return. The path is not measured in miles but in homecomings. Welcome home, one more time.",
+  "The Gita does not ask you to be perfect — only present. Bring your ordinary self to these pages; that is the true offering.",
+  "Some days the verse will shine. Some days it will feel quiet. Both are gifts. Read, anyway.",
+  "Let this be a small island of stillness in your day, dear ones — a place where no one is asking anything of you but yourselves.",
+  "The river of the day is waiting. Before you step in, rest here a moment on its bank. The water will still be there.",
+  "You are allowed to begin again. Every morning is made exactly for that.",
+  "A soft welcome, friend. Whatever came before this moment has already done its teaching. Listen now with a fresh ear.",
+  "The lamp within you has not gone out. It only asks, sometimes, for a little attention. Here it is.",
+  "Halfway there — and every step has changed you, even in ways you cannot see yet. Keep walking.",
+  "The Gita is not a ladder to climb; it is a fire to sit near. Warm yourself here for a few minutes, and then go on.",
+  "Today, let the verse read you, friends, more than you read the verse. See what it notices in you.",
+  "The world will not slow down for this practice; you must slow down for it. Do that now.",
+  "Shantih, shantih, shantih — peace for body, peace for speech, peace for mind. May all three meet for you this morning.",
+  "Whatever is heavy can be set down here. The Gita will keep it safely while you read.",
+  "The road home is not long; it is simply honest. One true breath is already part of the return.",
+  "Notice, before you begin, a small sweetness somewhere — in the breath, in the morning, in being alive at all. Thank that.",
+  "Every great journey has its quiet middle, where nothing spectacular happens. You are in exactly the right place.",
+  "The Gita asks nothing dramatic of you today. Only: read slowly, listen inside, and carry one line into the day.",
+  "Arjuna, too, was unsure. Arjuna, too, wanted to run. The Gita is for all of us in the middle of not-knowing.",
+  "Krishna's voice is close — closer than you think. The teacher you need rarely arrives from far away.",
+  "Near the end of the path, something softens. Let it. You do not have to hold yourself so tightly anymore.",
+  "A deep breath in, a slow breath out. The practice begins before the first word is read.",
+  "You are nearly through a full turn of the moon with the Gita. Whatever has changed in you is yours to keep.",
+  "The last page of this chapter, and the first page of whatever comes next. Thank yourself, quietly, for showing up."
+];
+
+// ---------------- Little notes for Bailey & Lily ----------------
+// A rotating, wholesome thought for the Mhatre pups — Gita-flavored, Bombay-aware, dog-safe.
+const pawsNotes = [
+  "The Gita names the dog among the beings the wise see with equal love. Bailey and Lily already see you that way — without ranking, without conditions. Look back today with the same eye.",
+  "Bombay mornings are warming up. Try walks before 8 AM, and feel the pavement with your own palm first — if it's too hot for you, it's too hot for their paws.",
+  "A few cubes of cold seedless watermelon make a perfect afternoon treat. Mostly water, lots of love. Watch for the little tail-thump that follows.",
+  "Dogs are natural karma yogis — they fetch the ball with their whole heart, then drop it without a thought. Krishna would approve.",
+  "April humidity in Bombay is sneaky. Keep an extra bowl of fresh water near their favorite napping spot. A few ice cubes in the heat = pure joy.",
+  "Carrot sticks, cucumber slices, and a small piece of apple (no seeds, no core) make a wholesome snack tray. Tiny portions; they don't need much to feel celebrated.",
+  "Notice how Bailey and Lily greet you the same whether you've been gone two minutes or two hours. That is sama-darśana — the equal eye — wrapped in fur.",
+  "On AC days, indoor humidity drops more than you'd think. Refill their water bowls a little more often than usual.",
+  "A few blueberries, a cube of watermelon, half a banana mashed on a spoon — these turn an ordinary afternoon into a small festival.",
+  "The Gita compares a steady mind to a lamp in a windless room. Watch a sleeping dog. Same teaching, fewer Sanskrit words.",
+  "Pre-monsoon Bombay heat is hardest from late morning to late afternoon. Cool tiled floors and shaded balconies are gifts. Save real walks for early or after sunset.",
+  "Plain cooked pumpkin (no sugar, no spice) is gentle on dog tummies and full of fibre. A spoonful in dinner = happy bellies.",
+  "You don't have to teach a dog to love you — that's bhakti, pure devotion, already showing up at your feet twice a day.",
+  "Hot months mean more panting and more thirst. A splash of water mixed into kibble helps them hydrate without noticing.",
+  "Cucumber is mostly water and almost no calories. Cool, crunchy, perfect for a warm Bombay afternoon. Slice thin.",
+  "The Gita teaches ahimsa — non-harming. Bailey and Lily live it without trying. Your home is already practising the verse.",
+  "A small list to keep handy: no grapes, no raisins, no onions, no garlic, no chocolate, no avocado. Worth a glance every time food is near.",
+  "A short evening walk after sunset, when the sea breeze starts, is a small gift in this heat. They'll come back slower, but happier.",
+  "Krishna says the divine dwells in the heart of every being. Two such hearts are sleeping somewhere in your home right now.",
+  "A green bean or two from your dinner plate is fine — plain, no salt, no oil. Frozen ones make a snappy hot-day treat.",
+  "Brushing daily through the warm months helps. Less loose fur means cooler dogs. And it's quiet, meditative time for both of you.",
+  "Yudhishthira refused to enter heaven without his loyal dog. The Mahabharata, like you, knew exactly what it was talking about.",
+  "Cooked, plain sweet potato (a small cube) is a soft, easy treat for soft, easy moments.",
+  "Notice how dogs are entirely where they are. No yesterday, no tomorrow. Just this stick, this scratch, this nap. The Gita spends 18 chapters teaching what they already know.",
+  "Heat-stroke signs to watch: heavy panting, glazed eyes, extra drooling, wobbly walking. Cool water, shade, and a vet if it lingers.",
+  "A teaspoon of plain unsweetened curd in their food can be soothing in the heat. Skip if your dogs are sensitive to dairy.",
+  "Forgive your pups the way they forgive you. They are masters at it — they have already done the harder work.",
+  "Once a week, make a tiny fruit chaat for Bailey and Lily — a few blueberries, a cube of watermelon, a slice of apple. Not a meal; a memory.",
+  "At the end of the Gita, Krishna gives Arjuna freedom: \"Do as you wish.\" That same freedom is what you give your dogs every time you say their names with love.",
+  "Whatever you have learned this month from the Gita — patience, presence, kindness, letting go — your dogs probably learned it before you did. Thank them tonight."
+];
+
+// ---------------- Days: verses, meanings, reflections ----------------
+const days = [
+  {
+    ch:"Chapter 2 · Verse 47",
+    theme:"The Right to Action",
+    sanskrit:"कर्मण्येवाधिकारस्ते मा फलेषु कदाचन।\nमा कर्मफलहेतुर्भूर्मा ते सङ्गोऽस्त्वकर्मणि॥",
+    translit:"karmaṇy-evādhikāras te mā phaleṣu kadācana\nmā karma-phala-hetur bhūr mā te saṅgo 'stv akarmaṇi",
+    meaning:[
+      "Your claim, Krishna says, extends only to the doing — never to the outcome. You have every right to act, to try, to put yourself fully into the work. But the fruits of that work belong to forces much larger than any one person: timing, other people's choices, chance, the unseen currents of life.",
+      "And so two warnings follow in the same breath. First: do not let the fruit become your whole reason for acting; that quietly turns noble work into anxious grasping. Second: do not swing to the opposite pole and refuse to act at all, thinking 'if I can't control the outcome, why bother?' Withdrawal is not wisdom; it is another kind of fear.",
+      "Between those two traps — clutching and quitting — runs the narrow path the Gita calls karma yoga: act wholeheartedly, care deeply, and still, somehow, hold the result with an open hand."
+    ],
+    reflect:"Most anxiety is not about the work in front of us; it is about the outcome we cannot control. When you give yourself fully to the task — the call, the draft, the conversation, the meal — and let the result go, the work becomes lighter and truer. <em>Try this today:</em> before one task, silently say, \"I will do this well. The outcome is not mine to own.\"",
+    prompt:"Where in your life are you holding the outcome too tightly? What would change if you only owned the effort?"
+  },
+  {
+    ch:"Chapter 2 · Verse 20",
+    theme:"The Indestructible Self",
+    sanskrit:"न जायते म्रियते वा कदाचिन्\nनायं भूत्वा भविता वा न भूयः।\nअजो नित्यः शाश्वतोऽयं पुराणो\nन हन्यते हन्यमाने शरीरे॥",
+    translit:"na jāyate mriyate vā kadācin\nnāyaṁ bhūtvā bhavitā vā na bhūyaḥ\najo nityaḥ śāśvato 'yaṁ purāṇo\nna hanyate hanyamāne śarīre",
+    meaning:[
+      "The Self, Krishna says, does not enter into being at birth, and it does not pass away at death. It was not created, and it cannot end. Unborn, eternal, ancient, unchanging — it simply is, always.",
+      "When the body falls, like a worn garment set aside, the Self is untouched. This is not a philosophical flourish the Gita is adding for beauty; it is meant to steady a grieving, frightened warrior on the edge of battle.",
+      "And it is meant to steady us, too, in the smaller battles of our own lives — every loss, every goodbye, every ache of impermanence. Whatever you most deeply are cannot be damaged by what you most deeply fear."
+    ],
+    reflect:"Underneath every fear of loss — of youth, of people, of the body — is the belief that we are only this passing form. The Gita whispers a steadier truth: something in you was never fragile to begin with. <em>Try this today:</em> when a fearful thought arises, place a hand on your chest and ask, \"What in me is the one noticing this fear?\" Rest there, even for a breath.",
+    prompt:"What part of you feels untouched by time — the witness behind your thoughts, moods, and roles?"
+  },
+  {
+    ch:"Chapter 2 · Verse 14",
+    theme:"Learning to Endure",
+    sanskrit:"मात्रास्पर्शास्तु कौन्तेय शीतोष्णसुखदुःखदाः।\nआगमापायिनोऽनित्यास्तांस्तितिक्षस्व भारत॥",
+    translit:"mātrā-sparśās tu kaunteya śītoṣṇa-sukha-duḥkha-dāḥ\nāgamāpāyino 'nityās tāṁs titikṣasva bhārata",
+    meaning:[
+      "Our experiences of cold and heat, pleasure and pain, Krishna tells Arjuna, arise through the meeting of our senses with the world. They come, they stay a little while, they leave. None of them is permanent, and none of them is, at the deepest level, you.",
+      "So, he says, learn the art of titiksha — patient endurance. Not a stoic jaw clenched against feeling. Not a cheerful pretense that all is well. Something quieter: a dignified willingness to let the waves of sensation rise and fall through you without being drowned by any one of them.",
+      "Every mood, every ache, every little joy has a tide-like quality — it arrives and it recedes. Most of our exhaustion comes from fighting that tide. The Gita offers a gentler posture: stay. Let it move through. Trust that it, too, will pass."
+    ],
+    reflect:"Every feeling has a rising and a falling. We spend so much energy arguing with the weather of our own hearts. <em>Try this today:</em> the next uncomfortable feeling that arrives, don't fix it, name it — \"This is here now. It will also leave.\"",
+    prompt:"Which feeling have you been trying hardest to push away? Can you let it be, for just one minute?"
+  },
+  {
+    ch:"Chapter 2 · Verse 48",
+    theme:"Yoga as Evenness",
+    sanskrit:"योगस्थः कुरु कर्माणि सङ्गं त्यक्त्वा धनञ्जय।\nसिद्ध्यसिद्ध्योः समो भूत्वा समत्वं योग उच्यते॥",
+    translit:"yogasthaḥ kuru karmāṇi saṅgaṁ tyaktvā dhanañjaya\nsiddhy-asiddhyoḥ samo bhūtvā samatvaṁ yoga ucyate",
+    meaning:[
+      "Stay steady in yoga, Krishna says, and do your work — but do it with attachment set down. Whether success follows or failure follows, remain the same inside. This inner evenness, he tells us, is itself what we mean by yoga.",
+      "Notice what yoga is here. Not a posture on a mat. Not a breathing technique. A way of standing through the day: not swept away by winning, not collapsed by losing. Samatva — sameness — is the quiet ground underneath all the moving.",
+      "When outcomes no longer rule your mood, action becomes clean. The work becomes clearer. The day becomes lighter. You can still prefer one result over another; you simply stop staking your peace on it."
+    ],
+    reflect:"Yoga here is not a posture — it is a stance inside. When success does not inflate you and failure does not collapse you, you have found a kind of inner ground. <em>Try this today:</em> notice one moment you'd normally celebrate loudly or mourn deeply — and meet it with steadiness instead.",
+    prompt:"What would your day look like if one good review and one bad review affected you equally?"
+  },
+  {
+    ch:"Chapter 2 · Verse 50",
+    theme:"Skill in Action",
+    sanskrit:"बुद्धियुक्तो जहातीह उभे सुकृतदुष्कृते।\nतस्माद्योगाय युज्यस्व योगः कर्मसु कौशलम्॥",
+    translit:"buddhi-yukto jahātīha ubhe sukṛta-duṣkṛte\ntasmād yogāya yujyasva yogaḥ karmasu kauśalam",
+    meaning:[
+      "A mind steadied in yoga, Krishna says, lets go of both good and bad karma, right here in this life. So yoke yourself to yoga — because yoga is skill in action.",
+      "The skill spoken of here is not cleverness or shortcut. It is the quality of presence you bring to what you do. Work done from clarity leaves very little residue. Work done from ego, worry, or scheming leaves a sticky film that follows you into the next hour, the next day, the next face you meet.",
+      "To act skillfully, in Krishna's sense, is to act and leave nothing heavy behind. One dish, washed with attention. One message, written with care. One hard conversation, held without armor. That is yoga, too."
+    ],
+    reflect:"Skill here is not cleverness. It is the art of acting without the ego trying to grip every outcome. <em>Try this today:</em> do one small thing with complete attention: wash a dish, answer one message, listen to someone fully.",
+    prompt:"What does it feel like when you work without trying to impress anyone, including yourself?"
+  },
+  {
+    ch:"Chapter 2 · Verse 62-63",
+    theme:"The Chain of Desire",
+    sanskrit:"ध्यायतो विषयान्पुंसः सङ्गस्तेषूपजायते।\nसङ्गात्सञ्जायते कामः कामात्क्रोधोऽभिजायते॥\nक्रोधाद्भवति सम्मोहः सम्मोहात्स्मृतिविभ्रमः।\nस्मृतिभ्रंशाद् बुद्धिनाशो बुद्धिनाशात्प्रणश्यति॥",
+    translit:"dhyāyato viṣayān puṁsaḥ saṅgas teṣūpajāyate\nsaṅgāt sañjāyate kāmaḥ kāmāt krodho 'bhijāyate\nkrodhād bhavati sammohaḥ sammohāt smṛti-vibhramaḥ\nsmṛti-bhraṁśād buddhi-nāśo buddhi-nāśāt praṇaśyati",
+    meaning:[
+      "Krishna traces the descent with surgical clarity. First, the mind lingers on something it wants. Lingering becomes attachment. Attachment, frustrated, becomes craving. Craving, blocked, turns into anger.",
+      "Anger clouds the mind into confusion. Confusion erases our right memory — we forget who we are, what we value, what we have already learned. With memory gone, discernment collapses. And when discernment is gone, we are lost.",
+      "This is one of the clearest maps of how we fall apart. It begins so innocently: a single thought, dwelled on a little too long. The Gita is not scolding desire; it is showing the ladder we unknowingly climb down into suffering, one rung at a time."
+    ],
+    reflect:"The ladder down begins with a thought fed for too long. <em>Try this today:</em> catch one thought you've been rehearsing — about a person, a slight, a craving — and gently put it down before it becomes a storm.",
+    prompt:"Which thought have you been feeding lately that may not deserve so much of your mind?"
+  },
+  {
+    ch:"Chapter 3 · Verse 35",
+    theme:"Your Own Path",
+    sanskrit:"श्रेयान्स्वधर्मो विगुणः परधर्मात्स्वनुष्ठितात्।\nस्वधर्मे निधनं श्रेयः परधर्मो भयावहः॥",
+    translit:"śreyān sva-dharmo viguṇaḥ para-dharmāt sv-anuṣṭhitāt\nsva-dharme nidhanaṁ śreyaḥ para-dharmo bhayāvahaḥ",
+    meaning:[
+      "It is better, Krishna says, to live your own dharma imperfectly than to live another's perfectly. Even to fall while walking your own path is a kind of grace; to succeed on a borrowed path is a hidden failure.",
+      "The warning at the end is sharp: another's dharma is 'full of fear.' It breeds an uneasy, watchful life in which you must always keep up the shape of a calling that was never truly yours.",
+      "There is a quiet violence in living someone else's life — a parent's dream, an influencer's blueprint, a peer's timeline. The Gita says: your flawed, honest path is holier than a borrowed, polished one. Your own humble road is where real freedom begins."
+    ],
+    reflect:"Your own flawed, honest path is holier than a borrowed, polished one. <em>Try this today:</em> name one thing you are doing mostly because others expect it, and one thing that is truly yours. Give a little more weight to the second.",
+    prompt:"Whose life have you been quietly trying to copy? What would your own version look like?"
+  },
+  {
+    ch:"Chapter 4 · Verse 7",
+    theme:"When Things Feel Lost",
+    sanskrit:"यदा यदा हि धर्मस्य ग्लानिर्भवति भारत।\nअभ्युत्थानमधर्मस्य तदात्मानं सृजाम्यहम्॥",
+    translit:"yadā yadā hi dharmasya glānir bhavati bhārata\nabhyutthānam adharmasya tadātmānaṁ sṛjāmy aham",
+    meaning:[
+      "Whenever righteousness wanes and unrighteousness rises, Krishna promises, I come forth — I take form again.",
+      "Read as cosmic history, this is the doctrine of divine descent, the avatars across the ages. Read as inner truth, it is something even more personal: whenever confusion grows heavy in your own life, something truer also begins to stir in response.",
+      "Light is not absent when the darkness feels thick; it is quietly gathering itself to appear. Your difficulties may be the very ground on which something new in you is about to stand up."
+    ],
+    reflect:"Light arrives in response to the dark — not in spite of it. <em>Try this today:</em> look at one mess in your life and ask, \"What is this moment asking me to become?\"",
+    prompt:"What quality in you is trying to be born right now, in the middle of your current difficulty?"
+  },
+  {
+    ch:"Chapter 4 · Verse 38",
+    theme:"Knowledge as Fire",
+    sanskrit:"न हि ज्ञानेन सदृशं पवित्रमिह विद्यते।\nतत्स्वयं योगसंसिद्धः कालेनात्मनि विन्दति॥",
+    translit:"na hi jñānena sadṛśaṁ pavitram iha vidyate\ntat svayaṁ yoga-saṁsiddhaḥ kālenātmani vindati",
+    meaning:[
+      "Nothing in this world purifies like true knowledge, Krishna says. And that knowledge is not handed to us from outside — the one who becomes established in practice discovers it, in time, within oneself.",
+      "The two quiet words that matter most here are 'in time.' Wisdom does not arrive on a schedule you can set; it ripens in a life that keeps returning to the practice.",
+      "The work is not dramatic. It is the small, unglamorous loyalty of showing up again and again. Most of real spiritual life looks, from the outside, like nothing much. From the inside, it is slowly remaking you."
+    ],
+    reflect:"Consistency is the real teacher. <em>Try this today:</em> return to one small practice you've drifted from — a walk, a few minutes of silence, writing a page.",
+    prompt:"What practice, done badly but done daily, would most change your life over a year?"
+  },
+  {
+    ch:"Chapter 5 · Verse 18",
+    theme:"The Equal Eye",
+    sanskrit:"विद्याविनयसम्पन्ने ब्राह्मणे गवि हस्तिनि।\nशुनि चैव श्वपाके च पण्डिताः समदर्शिनः॥",
+    translit:"vidyā-vinaya-sampanne brāhmaṇe gavi hastini\nśuni caiva śva-pāke ca paṇḍitāḥ sama-darśinaḥ",
+    meaning:[
+      "The wise, Krishna says, see with an equal eye — the learned and humble scholar, the cow, the elephant, the dog, and even the one whom society has cast out. All are seen with the same quiet regard.",
+      "Sama-darsana — the equal eye — does not mean pretending differences in knowledge, role, or behavior do not exist. It means looking through those differences to the same living presence that shines in each being.",
+      "Externals tell only the smallest story; underneath, there is one radiance looking out through many eyes. Maturity is not ranking others more accurately. It is, slowly, beginning to stop ranking them at all."
+    ],
+    reflect:"Underneath the resumes and differences, the same life is looking out of every pair of eyes. <em>Try this today:</em> look once at someone you usually overlook — a cleaner, a stranger, a server — and silently acknowledge: \"You too.\"",
+    prompt:"Who are you most tempted to rank above or below yourself? What would equal seeing feel like?"
+  },
+  {
+    ch:"Chapter 6 · Verse 5",
+    theme:"Be Your Own Friend",
+    sanskrit:"उद्धरेदात्मनात्मानं नात्मानमवसादयेत्।\nआत्मैव ह्यात्मनो बन्धुरात्मैव रिपुरात्मनः॥",
+    translit:"uddhared ātmanātmānaṁ nātmānam avasādayet\nātmaiva hy ātmano bandhur ātmaiva ripur ātmanaḥ",
+    meaning:[
+      "Lift yourself up by yourself, Krishna says — and do not let yourself sink. Then, almost in the same breath, he adds the line that should stop us: you are your own friend, and you are your own enemy.",
+      "No one outside of you can be fully responsible for the tone of the voice inside your head. The same inner voice can lift you on a hard morning, or flatten you for the smallest mistake. And you are the one choosing which.",
+      "To befriend yourself is a practice, not a feeling that suddenly arrives. It begins in the quiet work of catching the harsh sentence inside, and, patiently, speaking a kinder one."
+    ],
+    reflect:"No one can save us from the tone of our own inner voice. <em>Try this today:</em> notice one harsh thing you've said to yourself this week. Say, silently, what a good friend would have said instead.",
+    prompt:"Are you treating yourself like a friend or like an enemy this week?"
+  },
+  {
+    ch:"Chapter 6 · Verse 6",
+    theme:"Winning the Inner Battle",
+    sanskrit:"बन्धुरात्मात्मनस्तस्य येनात्मैवात्मना जितः।\nअनात्मनस्तु शत्रुत्वे वर्तेतात्मैव शत्रुवत्॥",
+    translit:"bandhur ātmātmanas tasya yenātmaivātmanā jitaḥ\nanātmanas tu śatrutve vartetātmaiva śatru-vat",
+    meaning:[
+      "For the one who has conquered the self, Krishna says, the self becomes a friend. For the one who has not, the very self behaves like an enemy.",
+      "The 'self' meant here is the lower self — the restless, reactive, craving self, the one that wants what it wants the moment it wants it. To 'conquer' it is not to crush it, but to stop obeying it unconditionally.",
+      "Each time you feel an urge and choose not to act on it automatically, a small, quiet victory is won inside. Over many such small victories, the restless self becomes less your ruler and more your companion."
+    ],
+    reflect:"Mastery begins in small pauses. <em>Try this today:</em> when an urge rises — to scroll, to snap, to quit — pause three breaths. That small pause is the beginning of freedom.",
+    prompt:"What one small impulse, if you stopped obeying it, would free up the most peace?"
+  },
+  {
+    ch:"Chapter 6 · Verse 19",
+    theme:"The Steady Flame",
+    sanskrit:"यथा दीपो निवातस्थो नेङ्गते सोपमा स्मृता।\nयोगिनो यतचित्तस्य युञ्जतो योगमात्मनः॥",
+    translit:"yathā dīpo nivātastho neṅgate sopamā smṛtā\nyogino yata-cittasya yuñjato yogam ātmanaḥ",
+    meaning:[
+      "As a lamp placed in a windless room does not flicker — that, Krishna says, is the image of the yogi whose mind is collected in the Self.",
+      "Notice what is not in this image: there is no effort to 'make' the flame still. Take away the draft, and the flame naturally becomes steady. That is how stillness works in us too.",
+      "Take away the mental drafts of worry, comparison, endless scrolling, and rehearsing the past — and attention naturally becomes quiet. Meditation is less about building something and more about ceasing to disturb what is already, softly, there."
+    ],
+    reflect:"Stillness is not something we add; it is what remains when we stop fanning our own flame with worry. <em>Try this today:</em> before bed, sit for two minutes with eyes closed, and imagine your attention as a flame in a still room.",
+    prompt:"What 'winds' keep your inner flame flickering most — news, comparison, old stories?"
+  },
+  {
+    ch:"Chapter 6 · Verse 30",
+    theme:"Seeing the One",
+    sanskrit:"यो मां पश्यति सर्वत्र सर्वं च मयि पश्यति।\nतस्याहं न प्रणश्यामि स च मे न प्रणश्यति॥",
+    translit:"yo māṁ paśyati sarvatra sarvaṁ ca mayi paśyati\ntasyāhaṁ na praṇaśyāmi sa ca me na praṇaśyati",
+    meaning:[
+      "The one who sees Me everywhere, Krishna says, and sees everything within Me — I am never lost to them, and they are never lost to Me.",
+      "It is, perhaps, the Gita's tenderest assurance. To look for the sacred in everyone and everything is slowly to stop feeling alone in the universe. You are not wandering; you are walking inside the holy.",
+      "The divine is not behind a distant curtain you must earn your way through. It is the very texture of what is already happening — the tree outside, the stranger's kindness, the breath that just arrived without your asking."
+    ],
+    reflect:"The divine is not somewhere else; it is the texture of what is happening. <em>Try this today:</em> as you move through the day, silently greet: the sky, a tree, a stranger's kindness — \"You, too.\"",
+    prompt:"Where did you glimpse something sacred this week, even for a second?"
+  },
+  {
+    ch:"Chapter 9 · Verse 22",
+    theme:"What You Need Will Come",
+    sanskrit:"अनन्याश्चिन्तयन्तो मां ये जनाः पर्युपासते।\nतेषां नित्याभियुक्तानां योगक्षेमं वहाम्यहम्॥",
+    translit:"ananyāś cintayanto māṁ ye janāḥ paryupāsate\nteṣāṁ nityābhiyuktānāṁ yoga-kṣemaṁ vahāmy aham",
+    meaning:[
+      "To those who remember Me with an undivided heart and worship Me in steady devotion, Krishna says, I bring what they lack and I protect what they already have. Yoga — the gaining of what is not yet. Kshema — the safeguarding of what is.",
+      "Much of our tiredness is the heavy weight of thinking we must single-handedly secure our own life. Every need, every risk, every precaution — ours to manage alone.",
+      "The Gita gently suggests we were never meant to carry all of it by ourselves. Do your part sincerely, and trust that the wider order of things meets a sincere heart partway."
+    ],
+    reflect:"So much of our fatigue is the weight of carrying our own security alone. <em>Try this today:</em> name one worry and say, \"I've done what I can. I'll let this be held by something larger than me tonight.\"",
+    prompt:"What are you carrying that was never only yours to carry?"
+  },
+  {
+    ch:"Chapter 10 · Verse 20",
+    theme:"The Self in All",
+    sanskrit:"अहमात्मा गुडाकेश सर्वभूताशयस्थितः।\nअहमादिश्च मध्यं च भूतानामन्त एव च॥",
+    translit:"aham ātmā guḍākeśa sarva-bhūtāśaya-sthitaḥ\naham ādiś ca madhyaṁ ca bhūtānām anta eva ca",
+    meaning:[
+      "I am the Self, Krishna tells Arjuna, seated in the heart of every being. I am the beginning, the middle, and the end of all that lives.",
+      "This is one of the Gita's most radical equalities: the same innermost reality that is in you is in every life you will meet today. The person you love. The person you struggle with. The stranger whose name you will not learn.",
+      "If that were truly felt — not merely agreed with — how differently we would speak, look, decide. You are always, in some quiet way, meeting yourself."
+    ],
+    reflect:"Every being you meet carries the same light you do. <em>Try this today:</em> in your next conversation, silently remember: \"The same life that is in me is looking out through these eyes.\"",
+    prompt:"Who have you been treating like a function (barista, colleague, parent) instead of a person?"
+  },
+  {
+    ch:"Chapter 12 · Verse 13-14",
+    theme:"Qualities of a Calm Heart",
+    sanskrit:"अद्वेष्टा सर्वभूतानां मैत्रः करुण एव च।\nनिर्ममो निरहङ्कारः समदुःखसुखः क्षमी॥\nसन्तुष्टः सततं योगी यतात्मा दृढनिश्चयः।\nमय्यर्पितमनोबुद्धिर्यो मद्भक्तः स मे प्रियः॥",
+    translit:"adveṣṭā sarva-bhūtānāṁ maitraḥ karuṇa eva ca\nnirmamo nirahaṅkāraḥ sama-duḥkha-sukhaḥ kṣamī\nsantuṣṭaḥ satataṁ yogī yatātmā dṛḍha-niścayaḥ\nmayy-arpita-mano-buddhir yo mad-bhaktaḥ sa me priyaḥ",
+    meaning:[
+      "A devotee, Krishna says, is one who bears ill will toward no one, is friendly and compassionate, free of the grip of 'mine' and the swelling of 'I,' the same in pleasure and pain, forgiving, content, self-restrained, firm in resolve, with mind and intellect offered up to Me. Such a one is dear to Me.",
+      "Read the list slowly. There is nothing in it about being famous, loud, or impressive. The qualities the Gita holds most dear are quiet ones — the traits of a good, steady, peaceful heart.",
+      "The spiritual life, here, is not a dramatic ascent. It is a steady softening — of pride, of grudge, of grasp. What makes one dear to the Divine is not achievement, but a certain gentleness that slowly settles in."
+    ],
+    reflect:"The qualities the Gita cherishes are quieter: kindness, contentment, forgiveness. <em>Try this today:</em> pick one — forgiveness, say — and practice it on one small slight. Don't announce it. Just let it go.",
+    prompt:"Which of these qualities feels nearest to you today? Which feels farthest?"
+  },
+  {
+    ch:"Chapter 12 · Verse 15",
+    theme:"Causing No Distress",
+    sanskrit:"यस्मान्नोद्विजते लोको लोकान्नोद्विजते च यः।\nहर्षामर्षभयोद्वेगैर्मुक्तो यः स च मे प्रियः॥",
+    translit:"yasmān nodvijate loko lokān nodvijate ca yaḥ\nharṣāmarṣa-bhayodvegair mukto yaḥ sa ca me priyaḥ",
+    meaning:[
+      "The one by whom the world is not disturbed, Krishna says, and who is not disturbed by the world — free from elation, resentment, fear, and agitation — such a one is dear to Me.",
+      "Here is a rare and delicate measure of maturity. Not how much you have built. Not how much attention you can command. But: how gently you pass through the lives around you.",
+      "How few storms of your own moods do you ask the people near you to weather? How little wreckage do you leave in a room? The Gita treats that gentleness as a sacred thing."
+    ],
+    reflect:"A mature person leaves less wreckage behind. <em>Try this today:</em> at the end of the day, ask: \"Did I make anyone's day a little harder than it had to be?\" Adjust tomorrow.",
+    prompt:"Is the way you carry your moods easy on the people around you?"
+  },
+  {
+    ch:"Chapter 13 · Verse 8-9",
+    theme:"The Mark of Knowledge",
+    sanskrit:"अमानित्वमदम्भित्वमहिंसा क्षान्तिरार्जवम्।\nआचार्योपासनं शौचं स्थैर्यमात्मविनिग्रहः॥",
+    translit:"amānitvam adambhitvam ahiṁsā kṣāntir ārjavam\nācāryopāsanaṁ śaucaṁ sthairyam ātma-vinigrahaḥ",
+    meaning:[
+      "True knowledge, Krishna says, shows itself as humility, absence of pretense, non-harming, patience, honesty, service to a teacher, inner and outer cleanliness, steadiness, and self-mastery.",
+      "Notice the surprise here: knowledge, in the Gita, is not how much you know. It is who you have become.",
+      "What you really understand eventually shows up as how you speak, how you treat strangers, what you refuse to harm, how long you can stay with something difficult without running. The test of wisdom is not the depth of your answers — it is the quality of your days."
+    ],
+    reflect:"Real knowledge shows up as character. <em>Try this today:</em> pick one — say, uprightness — and align one small action with it. Send the honest message. Keep the small promise.",
+    prompt:"Which of these nine qualities is most visible in your life right now? Which is asking to grow?"
+  },
+  {
+    ch:"Chapter 14 · Verse 22-25",
+    theme:"Rising Above the Tides",
+    sanskrit:"उदासीनवदासीनो गुणैर्यो न विचाल्यते।\nगुणा वर्तन्त इत्येव योऽवतिष्ठति नेङ्गते॥\nसमदुःखसुखः स्वस्थः समलोष्टाश्मकाञ्चनः।\nतुल्यप्रियाप्रियो धीरस्तुल्यनिन्दात्मसंस्तुतिः॥",
+    translit:"udāsīna-vad āsīno guṇair yo na vicālyate\nguṇā vartanta ity eva yo 'vatiṣṭhati neṅgate\nsama-duḥkha-sukhaḥ sva-sthaḥ sama-loṣṭāśma-kāñcanaḥ\ntulya-priyāpriyo dhīras tulya-nindātma-saṁstutiḥ",
+    meaning:[
+      "Such a person, Krishna says, sits as if quietly uninvolved — not shaken by the moods of nature, aware that 'the qualities are simply playing their play,' not moving to join the dance.",
+      "Pain and pleasure feel the same to them. A clod of earth, a stone, and a piece of gold are received with equal eyes. Praise and blame are met with the same calm.",
+      "It sounds impossibly high, but the doorway is near. Begin by naming your moods as visitors rather than identities. 'Heaviness is here' is already a very different sentence from 'I am heavy.'"
+    ],
+    reflect:"You are not your weather. <em>Try this today:</em> when a mood arrives, label it softly — \"heaviness is visiting\" — and keep doing what matters.",
+    prompt:"What mood have you been identifying with as \"me\" that is really just passing weather?"
+  },
+  {
+    ch:"Chapter 15 · Verse 5",
+    theme:"Going Beyond",
+    sanskrit:"निर्मानमोहा जितसङ्गदोषा\nअध्यात्मनित्या विनिवृत्तकामाः।\nद्वन्द्वैर्विमुक्ताः सुखदुःखसंज्ञै-\nर्गच्छन्त्यमूढाः पदमव्ययं तत्॥",
+    translit:"nirmāna-mohā jita-saṅga-doṣā\nadhyātma-nityā vinivṛtta-kāmāḥ\ndvandvair vimuktāḥ sukha-duḥkha-saṁjñair\ngacchanty amūḍhāḥ padam avyayaṁ tat",
+    meaning:[
+      "Free from pride and delusion, Krishna says, having overcome the grip of attachment, turned always toward the inner life, with cravings quieted, released from the opposites called pleasure and pain — the undeluded reach that imperishable state.",
+      "Notice the careful order. Pride loosens first. Attachment loosens next. Attention turns inward. Cravings quiet. Only then do the pairs of opposites stop pulling us around.",
+      "It is not one dramatic leap. It is a gradual, patient unknotting — one small loosening at a time, day after day, without grand announcements to anyone."
+    ],
+    reflect:"Each loosening prepares the next. <em>Try this today:</em> catch one craving — for approval, a drink, a notification — and let it pass without chasing it. Feel what's still here.",
+    prompt:"Which craving, if it had less grip on you, would free you the most?"
+  },
+  {
+    ch:"Chapter 16 · Verse 1-3",
+    theme:"The Divine Qualities",
+    sanskrit:"अभयं सत्त्वसंशुद्धिर्ज्ञानयोगव्यवस्थितिः।\nदानं दमश्च यज्ञश्च स्वाध्यायस्तप आर्जवम्॥",
+    translit:"abhayaṁ sattva-saṁśuddhir jñāna-yoga-vyavasthitiḥ\ndānaṁ damaś ca yajñaś ca svādhyāyas tapa ārjavam",
+    meaning:[
+      "Fearlessness, purity of heart, steadiness in wisdom, generosity, self-control, offering, self-study, simplicity, and uprightness — Krishna begins the long list of divine qualities with these.",
+      "Do not read them as distant ideals reserved for saints. Fearlessness is sending the honest message today. Generosity is the extra five minutes you give to a tired parent. Self-study is noticing your own patterns without flinching from them.",
+      "Each of these is already near at hand, waiting for a single choice. You do not need to wait to be worthy before practicing them; the practicing is what slowly makes you so."
+    ],
+    reflect:"Daily choices, not distant ideals. <em>Try this today:</em> pick just one of these qualities and give it your day.",
+    prompt:"Which of these qualities, if practiced for a month, would most change your inner life?"
+  },
+  {
+    ch:"Chapter 17 · Verse 15",
+    theme:"Austerity of Speech",
+    sanskrit:"अनुद्वेगकरं वाक्यं सत्यं प्रियहितं च यत्।\nस्वाध्यायाभ्यसनं चैव वाङ्मयं तप उच्यते॥",
+    translit:"anudvega-karaṁ vākyaṁ satyaṁ priya-hitaṁ ca yat\nsvādhyāyābhyasanaṁ caiva vāṅ-mayaṁ tapa ucyate",
+    meaning:[
+      "Speech that does not cause agitation, Krishna says, that is true, kind, and beneficial — along with the steady study of sacred wisdom — this is the tapas of speech.",
+      "Three gates: truth, kindness, usefulness. If a sentence fails all three, the silence would often have been a better offering. A single sentence can raise a life or flatten it.",
+      "Much of our own suffering, and much of the suffering we give others, passes through the small doorway of what we said, or what we wrote in two careless seconds. Slow that doorway down, and a surprising amount of life begins to change."
+    ],
+    reflect:"One sentence can raise a life or flatten it. <em>Try this today:</em> before one message or reply, run the three-gate check: true, kind, useful. If it doesn't pass, rewrite — or don't send.",
+    prompt:"Which recent thing you said would you say differently, knowing what you know now?"
+  },
+  {
+    ch:"Chapter 18 · Verse 47",
+    theme:"Your Own Work",
+    sanskrit:"श्रेयान्स्वधर्मो विगुणः परधर्मात्स्वनुष्ठितात्।\nस्वभावनियतं कर्म कुर्वन्नाप्नोति किल्बिषम्॥",
+    translit:"śreyān sva-dharmo viguṇaḥ para-dharmāt sv-anuṣṭhitāt\nsvabhāva-niyataṁ karma kurvan nāpnoti kilbiṣam",
+    meaning:[
+      "Better your own work, even flawed, Krishna says, than another's done perfectly. And following the work that arises from your own nature, you gather no stain.",
+      "Svabhava: your own inner grain, the way you are naturally shaped. Work that flows from that grain may look ordinary from the outside, but inside it is weightless — it does not leave the soul scratched and tired.",
+      "Work that violates your grain, however admired by the world, quietly grinds something down in you. The Gita asks only that you listen for your own grain — and then let it, patiently, carry you."
+    ],
+    reflect:"You don't have to be the best; you have to be true. <em>Try this today:</em> stop one comparison mid-thought. Return to what only you can do, done with care.",
+    prompt:"What work is so natural to you that you almost dismiss it as 'not special'?"
+  },
+  {
+    ch:"Chapter 18 · Verse 58",
+    theme:"Rest in the Heart",
+    sanskrit:"मच्चित्तः सर्वदुर्गाणि मत्प्रसादात्तरिष्यसि।\nअथ चेत्त्वमहङ्कारान्न श्रोष्यसि विनङ्क्ष्यसि॥",
+    translit:"mac-cittaḥ sarva-durgāṇi mat-prasādāt tariṣyasi\natha cet tvam ahaṅkārān na śroṣyasi vinaṅkṣyasi",
+    meaning:[
+      "With your mind turned to Me, Krishna says, you will cross every difficulty by My grace. But if, out of ego, you refuse to listen, you will lose your way.",
+      "Ego, in this verse, is not a villain to be slain. It is simply the voice inside that insists, 'I will figure all of this out by myself.' Grace begins where that voice softens, even a little.",
+      "You do not have to stop being capable in order to ask for help. You only have to stop pretending you are self-sufficient in the places where you are quietly, humanly, not."
+    ],
+    reflect:"Grace begins where the 'I can handle it alone' voice softens. <em>Try this today:</em> before a hard conversation or decision, take one slow breath and silently say, \"I don't have to do this alone.\"",
+    prompt:"Where has your ego been refusing help — from others, from stillness, from something bigger?"
+  },
+  {
+    ch:"Chapter 18 · Verse 61",
+    theme:"The One Within",
+    sanskrit:"ईश्वरः सर्वभूतानां हृद्देशेऽर्जुन तिष्ठति।\nभ्रामयन्सर्वभूतानि यन्त्रारूढानि मायया॥",
+    translit:"īśvaraḥ sarva-bhūtānāṁ hṛd-deśe 'rjuna tiṣṭhati\nbhrāmayan sarva-bhūtāni yantrārūḍhāni māyayā",
+    meaning:[
+      "The Lord, Krishna says, dwells in the heart of every being, O Arjuna, turning them all as if they were figures mounted on a wheel, by the mysterious power of maya.",
+      "So much of what we search for outside already lives, quietly, inside us. The Gita is not asking you to travel anywhere; it is pointing inward.",
+      "The heart here is not the chest muscle. It is the inner chamber of listening. That is the address where the sacred receives its mail — and you have always known the way there."
+    ],
+    reflect:"The sacred lives in the chamber of inner listening. <em>Try this today:</em> for three breaths, rest attention at the center of the chest. No technique — just listening.",
+    prompt:"When was the last time you sat quietly with yourself with no purpose at all?"
+  },
+  {
+    ch:"Chapter 18 · Verse 63",
+    theme:"The Freedom to Choose",
+    sanskrit:"इति ते ज्ञानमाख्यातं गुह्याद्गुह्यतरं मया।\nविमृश्यैतदशेषेण यथेच्छसि तथा कुरु॥",
+    translit:"iti te jñānam ākhyātaṁ guhyād guhyataraṁ mayā\nvimṛśyaitad aśeṣeṇa yathecchasi tathā kuru",
+    meaning:[
+      "Thus, Krishna says, I have told you wisdom more secret than any secret. Consider it fully — and then do as you wish.",
+      "After chapter upon chapter of teaching, Krishna hands the freedom back to Arjuna. It is one of the most remarkable sentences in any scripture: truth does not coerce; it invites.",
+      "You are not being handed a rulebook to obey. You are being offered a light, and the choice of what to do with it remains, always, yours. Be gentle with yourself in that choosing."
+    ],
+    reflect:"Truth does not coerce; it invites. <em>Try this today:</em> don't try to be perfect with anything you've learned this month. Just reflect honestly, and choose freely, one small thing.",
+    prompt:"If no one was watching and no rules were pushing you, what would you freely choose today?"
+  },
+  {
+    ch:"Chapter 18 · Verse 66",
+    theme:"Let Go and Be Held",
+    sanskrit:"सर्वधर्मान्परित्यज्य मामेकं शरणं व्रज।\nअहं त्वां सर्वपापेभ्यो मोक्षयिष्यामि मा शुचः॥",
+    translit:"sarva-dharmān parityajya mām ekaṁ śaraṇaṁ vraja\nahaṁ tvāṁ sarva-pāpebhyo mokṣayiṣyāmi mā śucaḥ",
+    meaning:[
+      "Let go of every other duty, Krishna says, and take refuge in Me alone. I will free you from all wrongs. Do not grieve.",
+      "This is the Gita's final inhale. After asking Arjuna to do so much — to act, to discriminate, to detach, to see — Krishna now offers the softest instruction of all: come home.",
+      "Put down the long list. Rest in something larger than yourself. And the last three words — ma shucah, do not grieve — are not a command. They are a hand placed gently on the shoulder of a tired seeker."
+    ],
+    reflect:"You are allowed to put down the heavy basket. <em>Try this today:</em> for one minute, let something you've been carrying be set down — at your altar, in a prayer, at the feet of the sky.",
+    prompt:"If you were allowed to truly put something down today, what would it be?"
+  },
+  {
+    ch:"Chapter 18 · Verse 78",
+    theme:"Where There Is Clarity",
+    sanskrit:"यत्र योगेश्वरः कृष्णो यत्र पार्थो धनुर्धरः।\nतत्र श्रीर्विजयो भूतिर्ध्रुवा नीतिर्मतिर्मम॥",
+    translit:"yatra yogeśvaraḥ kṛṣṇo yatra pārtho dhanur-dharaḥ\ntatra śrīr vijayo bhūtir dhruvā nītir matir mama",
+    meaning:[
+      "Wherever Krishna, the master of yoga, is — and wherever Arjuna, the bow-bearer, is — there, Sanjaya says at last, will be fortune, victory, wellbeing, and steady moral clarity.",
+      "So closes the Gita. The image is a partnership: divine clarity on one side, sincere human effort on the other. Neither alone completes the picture.",
+      "When your best insight and your best action stand together, the life you build quietly carries a rightness about it — something the world will feel, even if it cannot name it. That is the Gita's final word, and your next first step."
+    ],
+    reflect:"Insight alone drifts; action alone stumbles. Together, they carry you. <em>Try this today:</em> pair your best insight from this month with one real action. That is where the Gita becomes your life.",
+    prompt:"What insight from this month most deserves an action to match it?"
+  }
+];
+
+// ---------------- Date helpers ----------------
+const START_DATE = new Date(2026, 3, 19); // April 19, 2026 (month 0-indexed)
+function dateForDay(i){
+  const d = new Date(START_DATE);
+  d.setDate(d.getDate() + i);
+  return d;
+}
+function formatDate(d){
+  return d.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'});
+}
+function formatShort(d){
+  return d.toLocaleDateString('en-US',{month:'short',day:'numeric'});
+}
+
+// ---------------- State ----------------
+const STORAGE_KEY = "gitaDailyState_v2";
+let state = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null") || {
+  current: 0,
+  completed: [],
+  journals: {}
+};
+
+function save(){ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+
+// ---------------- Render ----------------
+const els = {
+  sanskrit:document.getElementById('sanskrit'),
+  translit:document.getElementById('translit'),
+  meaning:document.getElementById('meaning'),
+  reflect:document.getElementById('reflect'),
+  prompt:document.getElementById('prompt'),
+  journal:document.getElementById('journal'),
+  dayTag:document.getElementById('dayTag'),
+  chapterRef:document.getElementById('chapterRef'),
+  cardDate:document.getElementById('cardDate'),
+  theme:document.getElementById('theme'),
+  streakNum:document.getElementById('streakNum'),
+  completeBtn:document.getElementById('completeBtn'),
+  dots:document.getElementById('dots'),
+  greetBody:document.getElementById('greetBody'),
+  greetDate:document.getElementById('greetDate'),
+  pawsBody:document.getElementById('pawsBody')
+};
+
+function render(){
+  const d = days[state.current];
+  const dateObj = dateForDay(state.current);
+
+  // Meaning: render as paragraphs
+  els.meaning.innerHTML = d.meaning.map(p=>`<p>${p}</p>`).join("");
+  els.sanskrit.textContent = d.sanskrit;
+  els.translit.textContent = d.translit;
+  els.reflect.innerHTML = d.reflect;
+  els.prompt.textContent = d.prompt;
+  els.journal.value = state.journals[state.current] || "";
+  els.dayTag.textContent = "Day " + (state.current+1);
+  els.chapterRef.textContent = d.ch;
+  els.cardDate.textContent = formatShort(dateObj);
+  els.theme.textContent = d.theme;
+  els.streakNum.textContent = state.completed.length;
+
+  // Greeting
+  els.greetBody.textContent = greetings[state.current % greetings.length];
+  els.greetDate.textContent = formatDate(dateObj);
+
+  // Bailey & Lily note
+  els.pawsBody.textContent = pawsNotes[state.current % pawsNotes.length];
+
+  const done = state.completed.includes(state.current);
+  els.completeBtn.textContent = done ? "Completed ✓" : "Mark Complete ✓";
+  els.completeBtn.disabled = done;
+
+  document.getElementById('prevBtn').disabled = state.current===0;
+  document.getElementById('nextBtn').disabled = state.current===days.length-1;
+
+  switchTab('read');
+  renderDots();
+}
+
+function renderDots(){
+  els.dots.innerHTML = "";
+  days.forEach((_,i)=>{
+    const dot = document.createElement('div');
+    dot.className = "dot" + (state.completed.includes(i)?" done":"") + (i===state.current?" active":"");
+    dot.textContent = i+1;
+    dot.title = "Day " + (i+1) + " · " + formatShort(dateForDay(i));
+    dot.onclick = ()=>{ state.current = i; save(); render(); };
+    els.dots.appendChild(dot);
+  });
+}
+
+// ---------------- Events ----------------
+document.getElementById('prevBtn').onclick = ()=>{
+  if(state.current>0){ state.current--; save(); render(); }
+};
+document.getElementById('nextBtn').onclick = ()=>{
+  if(state.current<days.length-1){ state.current++; save(); render(); }
+};
+document.getElementById('completeBtn').onclick = ()=>{
+  if(!state.completed.includes(state.current)){
+    state.completed.push(state.current);
+    save(); render();
+  }
+};
+els.journal.addEventListener('input', e=>{
+  state.journals[state.current] = e.target.value;
+  save();
+});
+
+document.querySelectorAll('.tab').forEach(btn=>{
+  btn.onclick = ()=> switchTab(btn.dataset.tab);
+});
+function switchTab(name){
+  document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active', b.dataset.tab===name));
+  document.querySelectorAll('.tab-content').forEach(c=>c.classList.toggle('active', c.id==='tab-'+name));
+}
+
+// ---------------- Auto-open today's reading ----------------
+// If today is within the 30-day window, default to today's entry on first visit.
+(function autoPickToday(){
+  const today = new Date(); today.setHours(0,0,0,0);
+  const start = new Date(START_DATE); start.setHours(0,0,0,0);
+  const diff = Math.floor((today - start) / (1000*60*60*24));
+  if(!localStorage.getItem(STORAGE_KEY) && diff >= 0 && diff < days.length){
+    state.current = diff;
+    save();
+  }
+})();
+
+// ---------------- Gentle session timer ----------------
+let seconds = 0;
+const timerEl = document.getElementById('timer');
+setInterval(()=>{
+  seconds++;
+  const m = String(Math.floor(seconds/60)).padStart(2,'0');
+  const s = String(seconds%60).padStart(2,'0');
+  timerEl.textContent = m+":"+s;
+},1000);
+
+render();
+</script>
+</body>
+</html>
